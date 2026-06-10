@@ -32,7 +32,7 @@ Now, going deeper to what a shell really does, from a simple point of view, duri
 
 #### Terminate: the shell executes shutdown commands, frees up memory resources, and terminates.
 
-During the interpretation phase, what the shell does is that it parses the user input: it breaks it down into tokens (tokenization), dividing the command into command name, options or flags and arguments.
+During the interpretation phase, what the shell does is that it parses the user input: it breaks it down into tokens (_tokenization_), dividing the command into command name, options or flags and arguments.
 
 ### Processes
 
