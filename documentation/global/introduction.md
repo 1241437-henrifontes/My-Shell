@@ -13,25 +13,25 @@ acquire new ones, and I am looking forward to the journey ahead. I don't really 
 
 # Purpose
 
-> **1 - To develop more of my skills and abilities in software engineering, system modeling and development, and programming in general.**
+> **1 – To develop more of my skills and abilities in software engineering, system modeling and development, and programming in general.**
 
-> **2 - To get out of my comfort zone and go beyond my limits.**
+> **2 – To get out of my comfort zone and go beyond my limits.**
 
-> **3 - To create something somehow innovative and useful that can be shared with the world.**
+> **3 – To create something somehow innovative and useful that can be shared with the world.**
 
-> **4 - To learn more about the inner workings of operating systems and how they interact with users and applications.**
+> **4 – To learn more about the inner workings of operating systems and how they interact with users and applications.**
 
 ---
 
 # Goals
 
-> **1 - To create my own shell, which will be a command-line interface that allows users to interact with the operating system and execute commands.**
+> **1 – To create my own shell, which will be a command-line interface that allows users to interact with the operating system and execute commands.**
 
-> **2 - To implement advanced features and make improvements on user experience with shell.**
+> **2 – To implement advanced features and make improvements on user experience with shell.**
 
-> **3 - To share my project with the world and get feedback from other developers and users.**
+> **3 – To share my project with the world and get feedback from other developers and users.**
 
-> **4 - To create a well-developed project that can be (proudly) included in my projects portfolio.**
+> **4 – To create a well-developed project that can be (proudly) included in my project portfolio.**
 
 ---
 
