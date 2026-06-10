@@ -1,0 +1,37 @@
+@startuml
+
+skinparam backgroundColor #1E1E2E
+skinparam actorFontColor #FFFFFF
+skinparam actorBorderColor #AFA9EC
+skinparam actorBackgroundColor #FFFFFF
+skinparam sequenceParticipantFontColor #FFFFFF
+skinparam sequenceParticipantBorderColor #AFA9EC
+skinparam sequenceParticipantBackgroundColor #534AB7
+skinparam sequenceArrowColor #9F9FBF
+skinparam sequenceArrowFontColor #FFFFFF
+skinparam sequenceLifeLineBorderColor #6E6E8E
+
+actor "User" as US
+participant "Terminal" as TM <<User Interface>>
+participant "Shell" as SH <<Interpreter>>
+participant "Operating System\n(Kernel)" as OS <<Core>>
+
+activate US
+autonumber
+
+US -> TM : inputs a command
+activate TM
+    TM -> SH : sends command to shell
+    activate SH
+        SH -> SH : tokenizes and parses\nthe command
+            SH -> OS : make a syscall
+            activate OS
+                OS -> OS : runs the\nprogram: exec()
+            OS --> SH : returns stdout
+            deactivate OS
+    SH --> TM : parses the output\nif necessary
+    deactivate SH
+TM --> US : renders the result\nin the screen
+deactivate TM
+
+@enduml
