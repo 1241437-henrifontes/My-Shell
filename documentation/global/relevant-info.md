@@ -45,9 +45,3 @@ occurred.
 This last described processes functioning will always happen in every shell program.
 
 ![Schema](images/schema.svg)
-
----
-
-# Bibliography
-
-1. [Tutorial – Write a Shell in C](https://brennan.io/2015/01/16/write-a-shell-in-c/)
