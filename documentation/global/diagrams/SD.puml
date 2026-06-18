@@ -1,0 +1,98 @@
+@startuml
+
+skinparam backgroundColor #1E1E2E
+skinparam defaultFontColor #FFFFFF
+skinparam titleFontColor #FFFFFF
+
+skinparam actorFontColor #FFFFFF
+skinparam actorBorderColor #AFA9EC
+skinparam actorBackgroundColor #FFFFFF
+
+skinparam sequenceParticipantFontColor #FFFFFF
+skinparam sequenceParticipantBorderColor #AFA9EC
+skinparam sequenceParticipantBackgroundColor #534AB7
+
+skinparam sequenceArrowColor #9F9FBF
+skinparam sequenceArrowFontColor #FFFFFF
+skinparam sequenceLifeLineBorderColor #6E6E8E
+
+skinparam sequenceGroupBorderColor #FFFFFF
+skinparam sequenceGroupBackgroundColor #534AB7
+skinparam sequenceGroupHeaderFontColor #FFFFFF
+
+title Sequence Diagram (US001)
+
+actor "User" as US
+participant "Terminal" as TM <<User Interface>>
+participant "Shell" as SH <<Interpreter>>
+participant "Command Program" as CP <<Process>>
+participant "Operating System\n(Kernel)" as OS <<Core>>
+participant "Files" as FL <<Storage>>
+
+activate US
+autonumber
+
+'==============='
+'     Input     '
+'==============='
+group Input Phase
+US -> TM : inputs a command
+    activate TM
+    TM -> SH : sends the raw input
+        activate SH
+end
+
+'===================================='
+'     Tokenization and Expansion     '
+'===================================='
+group Tokenization and Expansion Phase
+        SH -> SH : tokenizes the input (command + flags + args)
+        SH -> SH : performs tilde + variable/command/arithmetic expansion
+        SH -> SH : performs word splitting
+        SH -> SH : performs pathname expansion
+        SH -> SH : searches <b>$PATH: /usr/bin/command</b>
+end
+
+'===================='
+'     Processing     '
+'===================='
+group Processing
+        SH -> OS : calls <b>fork()</b> function
+            activate OS
+            OS --> SH : returns the child PID
+            deactivate OS
+        SH -> OS : calls <b>waitpid()</b> function with the child PID as argument and blocks
+        deactivate SH
+            activate OS
+            OS -> CP : creates shell child process
+            deactivate OS
+                activate CP
+                CP -> OS : calls <b>execve()</b> function, passing the command name + flags + args as arguments
+            activate OS
+                OS -> FL : reads inode/permissions (VFS)
+                    activate FL
+                    deactivate FL
+                OS -> OS : reads the command file ELF header
+                OS -> OS : maps the command file segments (code instructions, global variables, dynamic libraries) to the child process addresses
+                OS -> OS : executes the command program
+                loop during the execution
+                    CP --> TM : writes in <b>stdout</b> (fd 1 inherited)
+                end
+end
+
+'======================='
+'     Exit & Return     '
+'======================='
+group Exit & Return
+        CP -> OS : calls <b>exit(status)</b>
+                deactivate CP
+        OS --> SH : waitpid sends the child process status
+            deactivate OS
+    activate SH
+    SH --> TM : sends back the command prompt ($)
+    deactivate SH
+TM --> US : renders the output + command prompt on the screen
+deactivate TM
+end
+
+@enduml
